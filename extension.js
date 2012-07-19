@@ -41,7 +41,11 @@ const ScaleInForWindow = new Lang.Class({
                              scale_x:1,
                              scale_y:1,
                              time: WINDOW_ANIMATION_TIME,
-                             transition: 'easeOutQuad'
+                             transition: 'easeOutQuad',
+                             onComplete:function(actor){
+                                actor.set_scale(1,1);
+                             },
+                             onCompleteParams:[actor]
                             });
         };
     },
