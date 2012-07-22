@@ -59,8 +59,7 @@ const ScaleInForWindow = new Lang.Class({
     }
 });
 
-scalemaker = null;
-metadata = null;
+let scalemaker,metadata = null;
 
 function enable() {
     // check conflict extension
