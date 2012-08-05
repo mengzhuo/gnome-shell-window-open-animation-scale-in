@@ -29,7 +29,7 @@ const ScaleInForWindow = new Lang.Class({
         
             let actor = window.get_compositor_private();
             
-            let [width,height] = actor.get_size();
+            [width,height] = actor.get_size();
             
             // Initialized scale 
             let scale_x = Math.min(1-(this._screenW - width)/this._screenW,0.85);
