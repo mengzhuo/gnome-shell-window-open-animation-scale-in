@@ -32,8 +32,8 @@ const ScaleInForWindow = new Lang.Class({
             let [width,height] = actor.get_size();
             
             // Initialized scale 
-            scale_x = Math.min(1-(this._screenW - width)/this._screenW,0.85);
-            scale_y = Math.min(1-(this._screenH - height)/this._screenH,0.85);
+            let scale_x = Math.min(1-(this._screenW - width)/this._screenW,0.85);
+            let scale_y = Math.min(1-(this._screenH - height)/this._screenH,0.85);
             actor.set_scale(scale_x,scale_y);
             
             
@@ -42,14 +42,18 @@ const ScaleInForWindow = new Lang.Class({
                              scale_y:1,
                              time: WINDOW_ANIMATION_TIME,
                              transition: 'easeOutQuad',
-                             onComplete:function(actor){
-                                actor.set_scale(1,1);
-                             },
-                             onCompleteParams:[actor]
+                             onComplete:this._animationDone,
+                             onCompleteScope : this,
+                             onCompleteParams:[actor],
+                             onOverwrite : this._animationDone,
+                             onOverwriteScope : this,
+                             onOverwriteParams: [actor]
                             });
         };
     },
-    
+    _animationDone : function (actor){
+        actor.set_scale(1,1);
+    },
     destroy: function (){
         delete global._scale_in_aminator;
         this.display.disconnect(this.signalConnectID);
@@ -59,7 +63,8 @@ const ScaleInForWindow = new Lang.Class({
     }
 });
 
-let scalemaker,metadata = null;
+let scalemaker = null;
+let metadata = null;
 
 function enable() {
     // check conflict extension

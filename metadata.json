@@ -2,7 +2,7 @@
 "uuid": "window-open-animation-scale-in@mengzhuo.org",
 "shell-version": ["3.4","3.4.1"],
 "name": "Window Scale In",
-"url": "http://mengzhuo.org/gnome-shell-window-open-animation-scale-in",
+"url": "https://github.com/mengzhuo/gnome-shell-window-open-animation-scale-in",
 "description": "Offer a Scale-In-Amination effect while openning an window",
 "conflict-uuid": "window-open-animation-slide-in@mengzhuo.org"
 }
