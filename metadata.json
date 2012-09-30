@@ -1,6 +1,6 @@
 {
 "uuid": "window-open-animation-scale-in@mengzhuo.org",
-"shell-version": ["3.4","3.4.1"],
+"shell-version": ["3.4","3.4.1","3.6"],
 "name": "Window Scale In",
 "url": "https://github.com/mengzhuo/gnome-shell-window-open-animation-scale-in",
 "description": "Offer a Scale-In-Amination effect while openning an window",
