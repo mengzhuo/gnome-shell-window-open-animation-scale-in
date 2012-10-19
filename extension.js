@@ -5,7 +5,7 @@ const ExtensionSystem = imports.ui.extensionSystem;
 const ExtensionUtils = imports.misc.extensionUtils;
 
 const CONLICT_UUID = ["window-open-animation-slide-in@mengzhuo.org"];
-const WINDOW_ANIMATION_TIME = 0.20;
+const WINDOW_ANIMATION_TIME = 0.25;
 
 const ScaleInForWindow = new Lang.Class({
 
@@ -16,7 +16,9 @@ const ScaleInForWindow = new Lang.Class({
         this.display = global.screen.get_display();
         
         this.signalConnectID = this.display.connect('window-created', Lang.bind(this, this._scaleIn));
-
+        this.afterSignalConnectID = this.display.connect_after('window-created', Lang.bind(this, this._animationDone));
+        //try to fixed Chromium and Updatemanager Bug
+        
         global._scale_in_aminator = this;
         
         this._screenW = global.screen_width;
@@ -57,6 +59,7 @@ const ScaleInForWindow = new Lang.Class({
     destroy: function (){
         delete global._scale_in_aminator;
         this.display.disconnect(this.signalConnectID);
+        this.display.disconnect(this.afterSignalConnectID);
     },
     _onDestroy : function (){
         this.destroy();
