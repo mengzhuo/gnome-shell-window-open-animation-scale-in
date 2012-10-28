@@ -16,8 +16,6 @@ const ScaleInForWindow = new Lang.Class({
         this.display = global.screen.get_display();
         
         this.signalConnectID = this.display.connect('window-created', Lang.bind(this, this._scaleIn));
-        this.afterSignalConnectID = this.display.connect_after('window-created', Lang.bind(this, this._animationDone));
-        //try to fixed Chromium and Updatemanager Bug
         
         global._scale_in_aminator = this;
         
@@ -44,22 +42,16 @@ const ScaleInForWindow = new Lang.Class({
                              scale_y:1,
                              time: WINDOW_ANIMATION_TIME,
                              transition: 'easeOutQuad',
-                             onComplete:this._animationDone,
                              onCompleteScope : this,
                              onCompleteParams:[actor],
-                             onOverwrite : this._animationDone,
                              onOverwriteScope : this,
                              onOverwriteParams: [actor]
                             });
         };
     },
-    _animationDone : function (actor){
-        actor.set_scale(1,1);
-    },
     destroy: function (){
         delete global._scale_in_aminator;
         this.display.disconnect(this.signalConnectID);
-        this.display.disconnect(this.afterSignalConnectID);
     },
     _onDestroy : function (){
         this.destroy();
