@@ -42,12 +42,17 @@ const ScaleInForWindow = new Lang.Class({
                              scale_y:1,
                              time: WINDOW_ANIMATION_TIME,
                              transition: 'easeOutQuad',
+                             onComplete:this._animationDone,
                              onCompleteScope : this,
                              onCompleteParams:[actor],
+                             onOverwrite : this._animationDone,
                              onOverwriteScope : this,
                              onOverwriteParams: [actor]
                             });
         };
+    },
+    _animationDone : function (actor){
+        actor.set_scale(1,1);
     },
     destroy: function (){
         delete global._scale_in_aminator;
